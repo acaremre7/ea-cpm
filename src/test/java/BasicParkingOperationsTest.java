@@ -1,11 +1,14 @@
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class BasicParkingOperationsTest{
     private CarParkService carParkService;
 
     @Before
     public void setUp(){
-        carParkService = new CarParkService();
+        carParkService = new CarParkServiceImpl();
     }
     @After
     public void tearDown(){
@@ -13,13 +16,13 @@ public class BasicParkingOperationsTest{
     }
 
     @Test
-    public void testParking(){
+    public void testPark(){
         carParkService.park("QWE");
         Assert.assertEquals("QWE,,,,,,,,,", carParkService.getCurrentParkingOrder());
     }
 
     @Test
-    public void testUnparking(){
+    public void testUnpark(){
         carParkService.park("QWE");
         carParkService.park("ASD");
         carParkService.unpark(5000);
@@ -27,7 +30,7 @@ public class BasicParkingOperationsTest{
     }
 
     @Test
-    public void testCompacting(){
+    public void testCompact(){
         carParkService.park("QWE");
         carParkService.park("ASD");
         carParkService.unpark(5000);
