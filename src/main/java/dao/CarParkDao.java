@@ -23,4 +23,9 @@ public interface CarParkDao {
      * @param parkedCars Current parking order of the carpark
      */
     void storeCarPark(ParkedCar[] parkedCars);
+
+    /**
+     * Deletes both CarPark and Ticket files for testing purposes.
+     */
+    void cleanUpEnvironment();
 }

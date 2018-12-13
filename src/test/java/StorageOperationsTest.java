@@ -28,7 +28,7 @@ public class StorageOperationsTest {
 
     @Test
     public void testStoreCarPark() {
-        ParkedCar sampleCar = new ParkedCar(5000, "ASD");
+        ParkedCar sampleCar = new ParkedCar(5000, "ASD1-IC");
         ParkedCar[] sampleCarPark = new ParkedCar[10];
         sampleCarPark[0] = sampleCar;
         carParkDao.storeCarPark(sampleCarPark);
@@ -50,10 +50,10 @@ public class StorageOperationsTest {
 
     private ParkedCar[] generateSampleCarPark() {
         ParkedCar[] parkedCars = carParkDao.getCarPark();
-        ParkedCar parkedCar1 = new ParkedCar(5000, "ASD");
-        ParkedCar parkedCar2 = new ParkedCar(5004, "QWE");
-        ParkedCar parkedCar3 = new ParkedCar(5054, "GHJ");
-        ParkedCar parkedCar4 = new ParkedCar(5123, "ZXC");
+        ParkedCar parkedCar1 = new ParkedCar(5000, "ASD2-IC");
+        ParkedCar parkedCar2 = new ParkedCar(5004, "QWE1-IC");
+        ParkedCar parkedCar3 = new ParkedCar(5054, "GHJ1-IC");
+        ParkedCar parkedCar4 = new ParkedCar(5123, "ZXC1-IC");
         parkedCars[0] = parkedCar1;
         parkedCars[2] = parkedCar2;
         parkedCars[6] = parkedCar3;

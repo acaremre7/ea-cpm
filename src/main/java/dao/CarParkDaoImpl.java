@@ -3,16 +3,17 @@ package dao;
 import model.ParkedCar;
 
 import java.io.*;
+import java.nio.file.Files;
 
 public class CarParkDaoImpl implements CarParkDao {
     private final String TICKET_PATH = "src/main/resources/Ticket";
     private final String CARPARK_PATH = "src/main/resources/CarPark";
 
+    @Override
     public int createTicket() {
         int result = 0;
-        try {
-            File file = new File(TICKET_PATH);
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        File file = new File(TICKET_PATH);
+        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             String ticketString;
             if ((ticketString = br.readLine()) != null) {
                 result = Integer.valueOf(ticketString)+1;
@@ -40,11 +41,11 @@ public class CarParkDaoImpl implements CarParkDao {
         return result;
     }
 
+    @Override
     public ParkedCar[] getCarPark() {
         ParkedCar[] parkedCars = new ParkedCar[10];
-        try{
-            File file = new File(CARPARK_PATH);
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        File file = new File(CARPARK_PATH);
+        try(BufferedReader br = new BufferedReader(new FileReader(file))){
             String rawLine;
             String[] parsedLine;
             int index = 0;
@@ -72,6 +73,7 @@ public class CarParkDaoImpl implements CarParkDao {
         return parkedCars;
     }
 
+    @Override
     public void storeCarPark(ParkedCar[] parkedCars) {
         try {
             String[] content = new String[10];
@@ -94,6 +96,24 @@ public class CarParkDaoImpl implements CarParkDao {
             }
         }catch (IOException e){
             System.err.println("Error while writing the CarPark file: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void cleanUpEnvironment(){
+        File carParkFile = new File(CARPARK_PATH);
+        File ticketFile = new File(TICKET_PATH);
+        try {
+            if(carParkFile.exists()) {
+                System.out.println("Deleting CarPark file");
+                Files.delete(carParkFile.toPath());
+            }
+            if(ticketFile.exists()) {
+                System.out.println("Deleting Ticket file");
+                Files.delete(ticketFile.toPath());
+            }
+        } catch (IOException e) {
+            System.err.println("Error while deleting files: " + e.getMessage());
         }
     }
 
