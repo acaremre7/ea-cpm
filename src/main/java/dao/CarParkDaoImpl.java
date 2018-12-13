@@ -23,7 +23,6 @@ public class CarParkDaoImpl implements CarParkDao {
                 writeFile(TICKET_PATH,new String[]{"5000"});
             }
         } catch (FileNotFoundException e) {
-            System.err.println("Ticket file is not found at expected location, creating a new one...");
             try {
                 Boolean fileCreated = new File(TICKET_PATH).createNewFile();
                 if(fileCreated){
@@ -57,7 +56,6 @@ public class CarParkDaoImpl implements CarParkDao {
                 index++;
             }
         } catch (FileNotFoundException e) {
-            System.err.println("CarPark file is not found at expected location, creating a new one...");
             try {
                 Boolean fileCreated = new File(CARPARK_PATH).createNewFile();
                 if(!fileCreated){
@@ -82,7 +80,6 @@ public class CarParkDaoImpl implements CarParkDao {
             }
             writeFile(CARPARK_PATH,content);
         }catch (FileNotFoundException e) {
-            System.err.println("CarPark file is not found at expected location, creating a new one...");
             try {
                 Boolean fileCreated = new File(CARPARK_PATH).createNewFile();
                 if(fileCreated) {
