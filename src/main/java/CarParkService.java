@@ -25,6 +25,13 @@ public interface CarParkService{
     String getCurrentParkingOrder();
 
     /**
+     * Processes given input and executes it.
+     * @param input Input given by user
+     * @return latest state of car park
+     */
+    String processInput(String input);
+
+    /**
      * Resets CarPark for testing purposes
      */
     void cleanUpEnvironment();

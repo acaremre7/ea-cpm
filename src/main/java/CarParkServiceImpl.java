@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class CarParkServiceImpl implements CarParkService{
+    private static final String INPUT_REGEX = "((([p])[^\\s,]+)(,?)|(([u])[\\d]+)(,?)|([c](,?)))*";
     private ParkedCar[] parkedCars;
     private CarParkDao carParkDao;
 
@@ -80,6 +81,33 @@ public class CarParkServiceImpl implements CarParkService{
             }
         }
         return result.toString();
+    }
+
+    @Override
+    public String processInput(String input){
+        if (!input.matches(INPUT_REGEX)) {
+            return "Input is not valid. Please try again.";
+        } else if (input.endsWith(",")) {
+            return "Input is incomplete. Please remove ',' from the end.";
+        } else if (input.isEmpty()) {
+            return "Empty input.";
+        } else {
+            String[] inputArray = input.split(",");
+            for (String s : inputArray) {
+                switch (s.charAt(0)) {
+                    case 'p':
+                        park(s.split("p")[1]);
+                        break;
+                    case 'u':
+                        unpark(Integer.valueOf(s.split("u")[1]));
+                        break;
+                    case 'c':
+                        compact();
+                        break;
+                }
+            }
+            return getCurrentParkingOrder();
+        }
     }
 
     @Override
